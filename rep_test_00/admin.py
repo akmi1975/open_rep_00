@@ -17,3 +17,4 @@ admin.site.register(Regions)
 #admin.site.register(Regions, RegionsAdmin)	
 #admin.site.register(GorRayon)
 admin.site.register(GorRayon, GorRayonAdmin)
+
