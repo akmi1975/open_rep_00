@@ -14,6 +14,7 @@ class GorRayonAdmin(admin.ModelAdmin):
 
 class NspAdmin(admin.ModelAdmin):
 	list_display = ('region', 'rayon', 'name')
+	
 
 
 admin.site.register(Regions)	

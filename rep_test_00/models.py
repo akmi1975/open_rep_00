@@ -35,3 +35,4 @@ class Nsp(models.Model):
 	class Meta:
 		verbose_name_plural = 'Населенные пункты'
 		verbose_name = 'Населеный пункт'
+
