@@ -17,7 +17,7 @@ class GorRayon(models.Model):
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
-		return self.name
+		return str(self.region.id) + ' ' + str(self.name)
 
 	class Meta:
 		verbose_name_plural = 'Города и(или) Районы'

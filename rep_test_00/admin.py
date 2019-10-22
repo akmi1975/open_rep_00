@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django import forms
 
 # Register your models here.
 
@@ -8,13 +9,16 @@ class RegionsAdmin(admin.ModelAdmin):
 	list_display = ('name')
 	#list_display_links = ('name')
 '''
+
 class GorRayonAdmin(admin.ModelAdmin):
 	list_display = ('region', 'name')
 	#list_display_links = ('region', 'name')
 
 class NspAdmin(admin.ModelAdmin):
 	list_display = ('region', 'rayon', 'name')
-	
+	#def get_queryset(self, request):
+	#	return GorRayon.objects.filter(region=1)
+	#list_filter = ('region',)
 
 
 admin.site.register(Regions)	
