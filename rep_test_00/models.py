@@ -1,12 +1,13 @@
 from django.db import models
-
+from smart_selects.db_fields import ChainedForeignKey
 # Create your models here.
 
 class Regions(models.Model):
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
-		return self.name	
+		#return str(self.id) + ' ' + str(self.name)
+		return self.name
 
 	class Meta:
 		verbose_name_plural = 'Регионы'
@@ -14,10 +15,12 @@ class Regions(models.Model):
 
 class GorRayon(models.Model):
 	region = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
+	#region = models.ManyToManyField(Regions, null=True, verbose_name='Регион')
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
 		return str(self.region.id) + ' ' + str(self.name)
+		#return self.name
 
 	class Meta:
 		verbose_name_plural = 'Города и(или) Районы'
@@ -25,8 +28,15 @@ class GorRayon(models.Model):
 
 
 class Nsp(models.Model):
-	region = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
-	rayon = models.ForeignKey(GorRayon, null=True, on_delete=models.PROTECT, verbose_name='Район')
+	region_n = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
+	#rayon = models.ForeignKey(GorRayon, null=True, on_delete=models.PROTECT, verbose_name='Район')
+	rayon = ChainedForeignKey(
+        GorRayon,
+        chained_field='region_n',
+        chained_model_field='region',
+        show_all=False,
+        auto_choose=True,
+        null=True)	
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
