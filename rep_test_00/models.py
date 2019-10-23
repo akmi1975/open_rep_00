@@ -19,8 +19,8 @@ class GorRayon(models.Model):
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
-		return str(self.region.id) + ' ' + str(self.name)
-		#return self.name
+		#return str(self.region.id) + ' ' + str(self.name)
+		return self.name
 
 	class Meta:
 		verbose_name_plural = 'Города и(или) Районы'
@@ -28,11 +28,11 @@ class GorRayon(models.Model):
 
 
 class Nsp(models.Model):
-	region_n = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
+	region = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
 	#rayon = models.ForeignKey(GorRayon, null=True, on_delete=models.PROTECT, verbose_name='Район')
 	rayon = ChainedForeignKey(
         GorRayon,
-        chained_field='region_n',
+        chained_field='region',
         chained_model_field='region',
         show_all=False,
         auto_choose=True,
