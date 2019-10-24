@@ -17,9 +17,9 @@ class GorRayonAdmin(admin.ModelAdmin):
 	list_per_page = 10
 
 
-#class NspAdmin(admin.ModelAdmin):
-	#inlines = [RegionInline,]
-	#list_display = ('region', 'rayon', 'name')
+class NspAdmin(admin.ModelAdmin):
+	list_display = ('region', 'rayon', 'name')
+	list_filter = ('region', 'rayon',)
 
 
 
@@ -27,6 +27,6 @@ admin.site.register(Regions)
 #admin.site.register(Regions, RegionsAdmin)	
 #admin.site.register(GorRayon)
 admin.site.register(GorRayon, GorRayonAdmin)
-#admin.site.register(Nsp, NspAdmin)
-admin.site.register(Nsp)
+admin.site.register(Nsp, NspAdmin)
+#admin.site.register(Nsp)
 

@@ -36,7 +36,8 @@ class Nsp(models.Model):
         chained_model_field='region',
         show_all=False,
         auto_choose=True,
-        null=True)	
+        null=True,
+        verbose_name='Район')	
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 
 	def __str__(self):
