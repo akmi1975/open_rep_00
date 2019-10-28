@@ -1,0 +1,4 @@
+for (var i=0;i<kol;i++){console.log(d[0].children[1].children[i].innerText);}
+for (var i=0;i<kol;i++){console.log(d[0].children[1].children[i].childElementCount);}
+
+for (var i=0;i<kol;i++){if (d[0].children[1].children[i].childElementCount > 1) {var k = d[0].children[1].children[i].childElementCount; for (var j=0;j<k;j++){console.log(d[0].children[1].children[i].children[j].innerText)}} else {console.log(d[0].children[1].children[i].innerText)};}
