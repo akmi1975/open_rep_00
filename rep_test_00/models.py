@@ -47,3 +47,23 @@ class Nsp(models.Model):
 		verbose_name_plural = 'Населенные пункты'
 		verbose_name = 'Населеный пункт'
 
+class Otrasl(models.Model):
+	name = models.CharField(max_length=50, verbose_name='Наименование')
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = 'Отрасли'
+		verbose_name = 'Отрасль'
+
+class PodOtrasl(models.Model):
+	otrasl = models.ForeignKey(Otrasl, null=True, on_delete=models.PROTECT, verbose_name='Отрасль')
+	name = models.CharField(max_length=50, verbose_name='Наименование')
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = 'Подотрасли'
+		verbose_name = 'Подотрасль'
