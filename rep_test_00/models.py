@@ -1,5 +1,5 @@
 from django.db import models
-from smart_selects.db_fields import ChainedForeignKey
+from smart_selects.db_fields import ChainedForeignKey, ChainedManyToManyField
 # Create your models here.
 
 class Regions(models.Model):
@@ -39,7 +39,7 @@ class Nsp(models.Model):
         null=True,
         verbose_name='Район')	
 	name = models.CharField(max_length=50, verbose_name='Наименование')
-	mo = models.BooleanField(verbose_name='Муниципальное образование')
+	mo = models.BooleanField(null=True, verbose_name='Муниципальное образование')
 
 	def __str__(self):
 		return self.name
@@ -68,3 +68,44 @@ class PodOtrasl(models.Model):
 	class Meta:
 		verbose_name_plural = 'Подотрасли'
 		verbose_name = 'Подотрасль'
+
+class Org(models.Model):
+	#rayon = models.ForeignKey(GorRayon, null=True, on_delete=models.PROTECT, verbose_name='Район')
+	otrasl = models.ForeignKey(Otrasl, null=True, on_delete=models.PROTECT, verbose_name='Отрасль')
+	pod_otrasl = ChainedForeignKey(
+        PodOtrasl,
+        chained_field='otrasl',
+        chained_model_field='otrasl',
+        show_all=False,
+        auto_choose=True,
+        null=True,
+        verbose_name='Подотрасль')	
+	region = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
+	rayon = ChainedForeignKey(
+        GorRayon,
+        chained_field='region',
+        chained_model_field='region',
+        show_all=False,
+        auto_choose=True,
+        null=True,
+        verbose_name='Район')	
+	nsp = ChainedForeignKey(
+        Nsp,
+        chained_field='rayon',
+        chained_model_field='rayon',
+        show_all=False,
+        auto_choose=True,
+        null=True,
+        verbose_name='Населенный пункт')	
+	inn = models.CharField(max_length=12, verbose_name='ИНН')
+	name = models.CharField(max_length=300, verbose_name='Наименование')
+	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
+	okved = models.CharField(null=True, max_length=8, verbose_name='ОКВЭД')
+	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = 'Организации'
+		verbose_name = 'Организация'

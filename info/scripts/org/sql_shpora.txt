@@ -1,0 +1,2 @@
+SELECT a.inn, a.name, b.name FROM rep_test_00_nsp as b, rep_test_00_org as a
+WHERE b.id = a.nsp_id
