@@ -18,8 +18,8 @@ class GorRayonAdmin(admin.ModelAdmin):
 
 
 class NspAdmin(admin.ModelAdmin):
-	list_display = ('region', 'rayon', 'name')
-	list_filter = ('region', 'rayon',)
+	list_display = ('region', 'rayon', 'name', 'mo')
+	list_filter = ('region', 'rayon', 'mo',)
 
 
 #class OtraslAdmin(admin.ModelAdmin):

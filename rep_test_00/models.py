@@ -39,6 +39,7 @@ class Nsp(models.Model):
         null=True,
         verbose_name='Район')	
 	name = models.CharField(max_length=50, verbose_name='Наименование')
+	mo = models.BooleanField(verbose_name='Муниципальное образование')
 
 	def __str__(self):
 		return self.name
