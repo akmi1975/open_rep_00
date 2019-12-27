@@ -12,7 +12,7 @@ class RegionsAdmin(admin.ModelAdmin):
 
 
 class GorRayonAdmin(admin.ModelAdmin):
-	list_display = ('region', 'name')
+	list_display = ('id', 'region', 'name')
 	list_filter = ('region',)
 	list_per_page = 10
 

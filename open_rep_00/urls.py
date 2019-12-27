@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 urlpatterns = [
+    path('', include('rep_test_00.urls')),
     path('admin/', admin.site.urls),
     re_path(r'^chaining/', include('smart_selects.urls')),
 ]
