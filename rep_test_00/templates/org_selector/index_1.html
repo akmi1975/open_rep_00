@@ -1,0 +1,56 @@
+{% load static %}
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'org_selector/style.css'%}">
+</head>
+<body>
+	<h1>test</h1>
+	<div class="d-table">
+	<div class="d-tr">
+	<div class="d-td">
+	{% for otrasl in Otrasls %}
+		<p><a href="/{{otrasl.id}}/0/{{me_ray}}/{{me_nsp}}/">{{ otrasl.name }} (id: {{ otrasl.id }})</a></p>
+		{% if otrasl.id == me_otr %}
+		<ol>
+		{% for podotrasls in PodOtrasls %}
+			{% if podotrasls.otrasl == otrasl %}
+				<ul><a href="/{{otrasl.id}}/{{podotrasls.id}}/{{me_ray}}/{{me_nsp}}/">{{ podotrasls.name }} (id: {{ podotrasls.id }})</a></ul>
+			{% endif %}
+		{% endfor %}
+		</ol>
+		{% endif %}
+	{% endfor %}
+	</div>
+
+	<div class="d-td">
+	{% for rayon in Rayons %}
+		<p><a href="/{{me_otr}}/{{me_podotr}}/{{rayon.id}}/0/">{{ rayon.name }} (id: {{ rayon.id }})</a></p>
+		{% if rayon.id == me_ray %}
+		<ol>
+		{% for nsp in Nsps %}
+			{% if nsp.rayon == rayon %}
+				<ul><a href="/{{me_otr}}/{{me_podotr}}/{{rayon.id}}/{{nsp.id}}/">{{ nsp.name }} (id: {{ nsp.id }})</a></ul>
+			{% endif %}
+		{% endfor %}
+		</ol>
+		{% endif %}
+	{% endfor %}
+	</div>
+	<div class="d-td basic">
+		<p>{{ me_otr }}</p>
+		<p>{{ me_podotr }}</p>
+		<p>{{ me_ray }}</p>
+		<p>{{ me_nsp }}</p>
+
+		{% for org in Orgs %}
+			<p>{{ org.name }}</p>
+		{% endfor %}
+	</div>
+	</div>
+	</div>
+
+</body>
+</html>
