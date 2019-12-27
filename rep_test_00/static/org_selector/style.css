@@ -1,6 +1,6 @@
 .d-table{
   display: table;
-  width: 50%;
+  width: 60%;
   border-collapse: collapse;
 }
 .d-tr{
@@ -12,4 +12,8 @@
   border: none;
   border: 1px solid #ccc;
   /*vertical-align: middle;*/
+}
+
+.basic {
+	width: 300px;
 }
