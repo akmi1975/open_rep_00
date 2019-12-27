@@ -1,0 +1,48 @@
+{% load static %}
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'org_selector/style.css'%}">
+</head>
+<body>
+	<h1>test</h1>
+	<div class="d-table">
+	<div class="d-tr">
+	<div class="d-td">
+	{% for otrasl in Otrasls %}
+		<p><a href="/{{otrasl.id}}/0/">{{ otrasl.name }} (id: {{ otrasl.id }})</a></p>
+		{% if otrasl.id == me_otr %}
+		<ol>
+		{% for podotrasls in PodOtrasls %}
+			{% if podotrasls.otrasl == otrasl %}
+				<ul><a href="/{{otrasl.id}}/{{podotrasls.id}}/">{{ podotrasls.name }} (id: {{ podotrasls.id }})</a></ul>
+			{% endif %}
+		{% endfor %}
+		</ol>
+		{% endif %}
+	{% endfor %}
+	</div>
+
+	<div class="d-td">
+	{% for rayon in Rayons %}
+		<p>{{ rayon.name }} (id: {{ rayon.id }})</p>
+		<ol>
+		{% for nsp in Nsps %}
+			{% if nsp.rayon == rayon %}
+				<ul>{{ nsp.name }} (id: {{ nsp.id }})</ul>
+			{% endif %}
+		{% endfor %}
+		</ol>
+	{% endfor %}
+	</div>
+	<div class="d-td">
+		<p>{{ me_otr }}</p>
+		<p>{{ me_podotr }}</p>
+	</div>	
+	</div>
+	</div>
+
+</body>
+</html>
