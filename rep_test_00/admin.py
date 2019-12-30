@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Regions, GorRayon, Nsp, Otrasl, PodOtrasl, Org
+from .models import Regions, GorRayon, Nsp, Otrasl, PodOtrasl, Org, orgContact
 
 
 class RegionsAdmin(admin.ModelAdmin):
@@ -33,6 +33,9 @@ class PodOtraslAdmin(admin.ModelAdmin):
 	list_display = ('id', 'otrasl', 'name')
 	list_filter = ('otrasl',)
 
+class orgContactAdmin(admin.ModelAdmin):
+	list_display = ('org', 'adres', 'telefone', 'email', 'url')
+
 #class OtraslAdmin(admin.ModelAdmin):
 #	list_display = ('name')
 
@@ -46,4 +49,4 @@ admin.site.register(Nsp, NspAdmin)
 admin.site.register(Otrasl, OtraslAdmin)
 admin.site.register(PodOtrasl, PodOtraslAdmin)
 admin.site.register(Org, OrgAdmin)
-
+admin.site.register(orgContact, orgContactAdmin)

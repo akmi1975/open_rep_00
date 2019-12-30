@@ -104,8 +104,20 @@ class Org(models.Model):
 	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
 
 	def __str__(self):
-		return self.name
+		return self.name_short
 
 	class Meta:
 		verbose_name_plural = 'Организации'
 		verbose_name = 'Организация'
+
+class orgContact(models.Model):
+	org = models.ForeignKey(Org, null=True, on_delete=models.PROTECT, verbose_name='Организация')
+	adres = models.CharField(max_length=200, verbose_name='Адрес')
+	telefone = models.CharField(max_length=50, verbose_name='Телефоны')
+	email = models.CharField(max_length=50, verbose_name='e-mail')
+	url = models.CharField(max_length=50, verbose_name='Интрнет адрес')
+	vremya = models.CharField(max_length=50, verbose_name='Время работы')
+
+	class Meta:
+		verbose_name_plural = 'Контактная информация'
+		verbose_name = 'Контактная информация'
