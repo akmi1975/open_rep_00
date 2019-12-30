@@ -37,7 +37,7 @@ class Nsp(models.Model):
         show_all=False,
         auto_choose=True,
         null=True,
-        verbose_name='Район')	
+        verbose_name='Район')
 	name = models.CharField(max_length=50, verbose_name='Наименование')
 	mo = models.BooleanField(null=True, verbose_name='Муниципальное образование')
 
@@ -79,7 +79,7 @@ class Org(models.Model):
         show_all=False,
         auto_choose=True,
         null=True,
-        verbose_name='Подотрасль')	
+        verbose_name='Подотрасль')
 	region = models.ForeignKey(Regions, null=True, on_delete=models.PROTECT, verbose_name='Регион')
 	rayon = ChainedForeignKey(
         GorRayon,
@@ -88,7 +88,7 @@ class Org(models.Model):
         show_all=False,
         auto_choose=True,
         null=True,
-        verbose_name='Район')	
+        verbose_name='Район')
 	nsp = ChainedForeignKey(
         Nsp,
         chained_field='rayon',
@@ -96,7 +96,7 @@ class Org(models.Model):
         show_all=False,
         auto_choose=True,
         null=True,
-        verbose_name='Населенный пункт')	
+        verbose_name='Населенный пункт')
 	inn = models.CharField(max_length=12, verbose_name='ИНН')
 	name = models.CharField(max_length=300, verbose_name='Наименование')
 	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
@@ -112,12 +112,13 @@ class Org(models.Model):
 
 class orgContact(models.Model):
 	org = models.ForeignKey(Org, null=True, on_delete=models.PROTECT, verbose_name='Организация')
-	adres = models.CharField(max_length=200, verbose_name='Адрес')
-	telefone = models.CharField(max_length=50, verbose_name='Телефоны')
-	email = models.CharField(max_length=50, verbose_name='e-mail')
-	url = models.CharField(max_length=50, verbose_name='Интрнет адрес')
-	vremya = models.CharField(max_length=50, verbose_name='Время работы')
+	adres = models.CharField(null=True, blank=True, max_length=200, verbose_name='Адрес')
+	telefone = models.CharField(null=True, blank=True, max_length=50, verbose_name='Телефоны')
+	email = models.CharField(null=True, blank=True, max_length=50, verbose_name='e-mail')
+	url = models.CharField(null=True, blank=True, max_length=50, verbose_name='Интрнет адрес')
+	vremya = models.CharField(null=True, blank=True, max_length=50, verbose_name='Время работы')
 
 	class Meta:
 		verbose_name_plural = 'Контактная информация'
 		verbose_name = 'Контактная информация'
+

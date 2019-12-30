@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Org, GorRayon, Nsp, Otrasl, PodOtrasl
+from .models import Org, GorRayon, Nsp, Otrasl, PodOtrasl, orgContact
 #from django.db.models import Q
 
 ME_OTRASL_ID = 0
@@ -72,13 +72,14 @@ def by_otrasl(request, otrasl_id, podotrasl_id, rayon_id, nsp_id):
 		#	PodOtrasls = PodOtrasls.filter(org__nsp=ME_NSP_ID)
 	test = [t_otr, t_pod, t_ray, t_nsp]
 
+	OrgContact = orgContact.objects.all()
 	#if vid_sort == 0:
 	#	mas_vid_sort = [1, t_vid_sort[1]]
 	#else:
 	#	mas_vid_sort = [0, t_vid_sort[0]]
 
 	#Orgs = Org.objects.all()
-	context = {'Rayons':Rayons, 'Nsps':Nsps, 'Otrasls':Otrasls, 'PodOtrasls':PodOtrasls, 'me_otr':ME_OTRASL_ID, 'me_podotr':ME_PODOTRASL_ID, 'me_ray': ME_RAYON_ID, 'me_nsp':ME_NSP_ID, 'Orgs':Orgs, 'test':test }
+	context = {'Rayons':Rayons, 'Nsps':Nsps, 'Otrasls':Otrasls, 'PodOtrasls':PodOtrasls, 'me_otr':ME_OTRASL_ID, 'me_podotr':ME_PODOTRASL_ID, 'me_ray': ME_RAYON_ID, 'me_nsp':ME_NSP_ID, 'Orgs':Orgs, 'test':test, 'OrgContact':OrgContact }
 
 	return render(request, 'org_selector/index_1.html', context)
 

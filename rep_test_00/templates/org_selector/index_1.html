@@ -56,10 +56,24 @@
 		{% if Orgs.count > 0 %}
 		{% for org in Orgs %}
 			<p>{{ org.name }}</p>
+			{% for org_cont in OrgContact %}
+				{% if org == org_cont.org %}
+					<p>Адрес: <strong>{{ org_cont.adres }}</strong></p>
+					<p>Телефоны: <strong>{{ org_cont.telefone }}</strong></p>
+					<p>e-mail: <strong>{{ org_cont.email }}</strong></p>
+					{% if org_cont.url|length != 0 %}
+						<p>www: <a href="{{ org_cont.url }}" target="_blank"><strong>{{ org_cont.url }}</strong></a></p>
+					{% endif %}
+					<p>Время работы: <strong>{{ org_cont.vremya }}</strong></p>
+				{% endif %}
+
+			{% endfor %}
+			<hr>
 		{% endfor %}
 		{% else %}
-			<p><em>Нет данных ({{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }})!</em></p>
+			<p><strong><em>Нет данных ({{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }})!</em></strong></p>
 		{% endif %}
+
 	</div>
 	</div>
 	</div>
