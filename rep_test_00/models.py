@@ -122,3 +122,22 @@ class orgContact(models.Model):
 		verbose_name_plural = 'Контактная информация'
 		verbose_name = 'Контактная информация'
 
+class Sheff(models.Model):
+	org = models.ForeignKey(Org, null=True, on_delete=models.PROTECT, verbose_name='Организация')
+	fm = models.CharField(null=True, blank=True, max_length=50, verbose_name='Фамилия')
+	im = models.CharField(null=True, blank=True, max_length=50, verbose_name='Имя')
+	ot = models.CharField(null=True, blank=True, max_length=50, verbose_name='Отчество')
+	dolzhn = models.CharField(null=True, blank=True, max_length=50, verbose_name='Должность')
+	inn_ruk = models.CharField(null=True, blank=True, max_length=12, verbose_name='ИНН руководителя')
+	doc = models.CharField(null=True, blank=True, max_length=20, verbose_name='Документ')
+	# документ на основаниии чего он утвержден руководителем
+	nom_doc = models.CharField(null=True, blank=True, max_length=10, verbose_name='Номер документа')
+	dt_doc = models.CharField(null=True, blank=True, max_length=10, verbose_name='Дата документа')
+	active = models.BooleanField(verbose_name='Действующий', null=True)
+
+	def __str__(self):
+		return f'{self.fm} {self.im} {self.ot}'
+
+	class Meta:
+		verbose_name_plural = 'Руководители'			
+		verbose_name = 'Руководитель'
