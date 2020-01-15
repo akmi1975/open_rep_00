@@ -38,6 +38,10 @@ class orgContactAdmin(admin.ModelAdmin):
 
 class SheffAdmin(admin.ModelAdmin):
 	list_display = ('org', 'fm', 'im', 'ot', 'inn_ruk',  'active')
+	search_fields = ('org__name_short', 'fm', 'im', 'ot')
+	# Related Field has invalid lookup: icontains
+	# https://code.djangoproject.com/ticket/2331
+	#list_filter = ('org',)
 
 #class OtraslAdmin(admin.ModelAdmin):
 #	list_display = ('name')
