@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Org, GorRayon, Nsp, Otrasl, PodOtrasl, orgContact
+from .my_func import basic_filtr_or
 #from django.db.models import Q
 
 ME_OTRASL_ID = 0
@@ -25,7 +26,6 @@ def index(request):
 	#context = {'Orgs':Orgs}
 	#return HttpResponse(template.render(context, request))
 	return render(request, 'org_selector/index_1.html', context)
-
 
 def by_otrasl(request, otrasl_id, podotrasl_id, rayon_id, nsp_id):
 	ME_OTRASL_ID = otrasl_id
@@ -83,3 +83,11 @@ def by_otrasl(request, otrasl_id, podotrasl_id, rayon_id, nsp_id):
 
 	return render(request, 'org_selector/index_1.html', context)
 
+def new_selection(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2_id):
+
+	new_href_vid_sel = basic_filtr_or(vid_sel, vid_1_id, pod_vid_1_id)
+
+	context = {}
+	context.update(new_href_vid_sel)
+
+	return render(request, 'org_selector/index_2.html', context)

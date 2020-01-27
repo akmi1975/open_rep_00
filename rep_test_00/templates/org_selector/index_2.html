@@ -1,0 +1,48 @@
+{% load static %}
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'org_selector/style.css'%}">
+</head>
+<body>
+	<h1>Test 2</h1>
+	<div>
+		<a href="/0/0/0/0/">Старая ссылка</a>
+	</div>
+	<div>
+		<p><a href="{{ href_vid_sel }}"><strong>Смена фильтра</strong></a></p>
+	</div>
+	<div>
+		<!-- {{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }} -->
+		<p><a href="/{{ vid_sel }}/0/0/0/0/"><strong>Сбросить фильтр</strong></a></p>
+	</div>
+
+	<div class="d-table">
+	<div class="d-tr">
+	<div class="d-td">
+		{% for vid_1_n in vid_1 %}
+			<!-- <p><a href="/{{otrasl.id}}/0/{{me_ray}}/{{me_nsp}}/">{{ otrasl.name }} (id: {{ otrasl.id }})</a></p> -->
+			<p><a href="/{{ vid_sel }}/{{vid_1_n.id}}/0/0/0/">{{ vid_1_n.name }} (id: {{ vid_1_n.id }})</a></p>
+			{% if vid_1_n.id == me_vid1 %}
+				<ol>
+				{% for pod_vid_1_n in pod_vid_1 %}
+					<ul><a href="/{{ vid_sel }}/{{vid_1_n.id}}/{{pod_vid_1_n.id}}/0/0/">{{ pod_vid_1_n.name }}</a></ul>
+				{% endfor %}
+				</ol>
+			{% endif %}
+		{% endfor %}
+	</div>
+	<div class="d-td">
+		{% for vid_2_n in vid_2 %}
+			<p>{{vid_2_n.name}}</p>
+		{% endfor %}
+	</div>
+	<div class="d-td basic">
+
+	</div>	
+	</div>
+	</div>
+</body>
+</html>
