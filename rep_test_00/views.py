@@ -85,7 +85,7 @@ def by_otrasl(request, otrasl_id, podotrasl_id, rayon_id, nsp_id):
 
 def new_selection(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2_id):
 
-	new_href_vid_sel = basic_filtr_or(vid_sel, vid_1_id, pod_vid_1_id)
+	new_href_vid_sel = basic_filtr_or(vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2_id)
 
 	context = {}
 	context.update(new_href_vid_sel)
