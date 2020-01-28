@@ -47,6 +47,36 @@
 		{% endfor %}
 	</div>
 	<div class="d-td basic">
+		<!-- {% if Orgs.count > 0 %} -->
+		{% for org in Orgs %}
+			<p>{{ org.name }}</p>
+			{% for org_cont in OrgContact %}
+				{% if org == org_cont.org %}
+					<p>Адрес: <strong>{{ org_cont.adres }}</strong></p>
+					<p>Телефоны: <strong>{{ org_cont.telefone }}</strong></p>
+					<p>e-mail: <strong>{{ org_cont.email }}</strong></p>
+					{% if org_cont.url|length != 0 %}
+						<p>www: <a href="{{ org_cont.url }}" target="_blank"><strong>{{ org_cont.url }}</strong></a></p>
+					{% endif %}
+					<p>Время работы: <strong>{{ org_cont.vremya }}</strong></p>
+				{% endif %}
+
+			{% endfor %}
+			<hr>
+		{% endfor %}
+		<!-- {% else %} -->
+			<!-- <p><strong><em>Нет данных ({{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }})!</em></strong></p> -->
+		<!-- {% endif %} -->
+		<div>
+			{% if page.has_previous %}
+			<a href="?page={{ page.previous_page_number }}">First</a>
+			{% endif %}
+			{{ page.number }} of {{ page.paginator.num_pages }}
+			{% if page.has_next %}
+			<a href="?page={{ page.next_page_number }}">Next</a>
+			{% endif %}
+
+		</div>
 
 	</div>
 	</div>
