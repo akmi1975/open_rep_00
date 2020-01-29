@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="{% static 'org_selector/style.css'%}">
+	<link rel="stylesheet" href="{% static 'org_selector/bootstrap.min.css'%}">
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=1f5043ac-05d5-492d-8518-bbdc89b1e38d
+		" type="text/javascript"></script>
 </head>
 <body>
 	<h1>Test 2</h1>
@@ -19,39 +21,74 @@
 		<p><a href="/{{ vid_sel }}/0/0/0/0/"><strong>Сбросить фильтр</strong></a></p>
 	</div>
 
-	<div class="d-table">
-	<div class="d-tr">
-	<div class="d-td">
+	<div class="container-fluid">
+	<div class="row no-gutters">
+	<div class="col-lg-2 col-md-3 col-sm-6">
+		<h5>{{ name_vid.0 }}</h5>
+		<div class="list-group">
 		{% for vid_1_n in vid_1 %}
-			<p><a href="/{{ vid_sel }}/{{vid_1_n.id}}/0/0/0/">{{ vid_1_n.name }} (id: {{ vid_1_n.id }})</a></p>
+			<!-- <a href="/{{ vid_sel }}/{{vid_1_n.id}}/0/0/0/" class="list-group-item list-group-item-action list-group-item-primary">{{ vid_1_n.name }}</a> -->
 			{% if vid_1_n.id == me_vid1 %}
-				<ol>
+				<a href="/{{ vid_sel }}/{{vid_1_n.id}}/0/0/0/" class="list-group-item list-group-item-action list-group-item-primary p-1 active">{{ vid_1_n.name }}</a>
+				<!-- <ol> -->
+				<!-- <div class="list-group"> -->
 				{% for pod_vid_1_n in pod_vid_1 %}
-					<ul><a href="/{{ vid_sel }}/{{vid_1_n.id}}/{{pod_vid_1_n.id}}/0/0/">{{ pod_vid_1_n.name }}</a></ul>
+					{% if pod_vid_1_n.id == me_podvid1 %}
+					<a href="/{{ vid_sel }}/{{vid_1_n.id}}/{{pod_vid_1_n.id}}/0/0/" class="list-group-item list-group-item-action list-group-item-light p-1 active">{{ pod_vid_1_n.name }}</a>
+					{% else %}
+					<a href="/{{ vid_sel }}/{{vid_1_n.id}}/{{pod_vid_1_n.id}}/0/0/" class="list-group-item list-group-item-action list-group-item-light p-1">{{ pod_vid_1_n.name }}</a>
+					{% endif %}
+					
 				{% endfor %}
-				</ol>
+				<!-- </div> -->
+				<!-- </ol> -->
+			{% else %}
+				<a href="/{{ vid_sel }}/{{vid_1_n.id}}/0/0/0/" class="list-group-item list-group-item-action list-group-item-primary p-1">{{ vid_1_n.name }}</a>
 			{% endif %}
 		{% endfor %}
+		</div>
 	</div>
-	<div class="d-td">
+	{% if vid_2.count > 0 %}
+	<div class="col-lg-2 col-md-3 col-sm-6">
+		<h5>{{ name_vid.1 }}</h5>
+		<div class="list-group">
 		{% for vid_2_n in vid_2 %}
-			<p><a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/0/">{{vid_2_n.name}}</a></p>
+			<!-- <a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/0/"  class="list-group-item list-group-item-action list-group-item-primary">{{vid_2_n.name}}</a> -->
 			{% if vid_2_n.id == me_vid2 %}
-				<ol>
+				<a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/0/"  class="list-group-item list-group-item-action list-group-item-primary p-1 active">{{vid_2_n.name}}</a>
 					{% for pod_vid_2_n in pod_vid_2 %}
-						<ul><a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/{{pod_vid_2_n.id}}/">{{ pod_vid_2_n.name }}</a></ul>
+						{% if pod_vid_2_n.id == me_podvid2 %}
+							<a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/{{pod_vid_2_n.id}}/"  class="list-group-item list-group-item-action list-group-item-light p-1 active">{{ pod_vid_2_n.name }}</a>
+						{% else %}
+							<a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/{{pod_vid_2_n.id}}/"  class="list-group-item list-group-item-action list-group-item-light p-1">{{ pod_vid_2_n.name }}</a>
+						{% endif %}
 					{% endfor %}
-				</ol>
+			{% else %}
+				<a href="/{{ vid_sel }}/{{me_vid1}}/{{me_podvid1}}/{{vid_2_n.id}}/0/"  class="list-group-item list-group-item-action list-group-item-primary p-1">{{vid_2_n.name}}</a>
 			{% endif %}
 		{% endfor %}
+		</div>
 	</div>
-	<div class="d-td basic">
+	{% endif %}
+	<div class="col-md-6 p-3">
 		<!-- {% if Orgs.count > 0 %} -->
+		<!-- ############################################################# -->
+		<nav>
+		  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+		    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#basic" role="tab" aria-controls="nav-home" aria-selected="true">Основная</a>
+		   	<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#sheff" role="tab" aria-controls="nav-profile" aria-selected="false">Руководитель</a>
+		    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#map" role="tab" aria-controls="nav-profile" aria-selected="false">Карта</a>
+		  </div>
+		</nav>
+		<div class="tab-content" id="nav-tabContent">
+		<div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="nav-basic-tab">
 		{% for org in Orgs %}
+			<p></p>
 			<p>{{ org.name }}</p>
 			{% for org_cont in OrgContact %}
 				{% if org == org_cont.org %}
 					<p>Адрес: <strong>{{ org_cont.adres }}</strong></p>
+					<script>var adr = '{{ org_cont.adres }}'</script>
 					<p>Телефоны: <strong>{{ org_cont.telefone }}</strong></p>
 					<p>e-mail: <strong>{{ org_cont.email }}</strong></p>
 					{% if org_cont.url|length != 0 %}
@@ -63,22 +100,156 @@
 			{% endfor %}
 			<hr>
 		{% endfor %}
+		</div>
+		<div class="tab-pane fade" id="sheff" role="tabpanel" aria-labelledby="nav-sheff-tab">
+			<p></p>
+			<p>{{ sheff.dolzhn }}</p>
+			<p>{{ sheff.inn_ruk }}</p>
+			<p>{{ sheff.fm }} {{ sheff.im }} {{ sheff.ot }}</p>
+
+			
+		</div>
+		<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="nav-map-tab">
+			<p style="color: red;">Модуль "Карта" работает в тестовом режиме!</p>
+			<div id="div_map" style="width:100%; height:75%;"></div>
+				<script>
+					ymaps.ready(init);
+
+					function init() {
+					    var myMap = new ymaps.Map('div_map', {
+					        center: [44.226863, 42.046770],
+					        zoom: 9
+					    });
+
+					    // Поиск координат центра Нижнего Новгорода.
+					    ymaps.geocode(adr, {
+					        /**
+					         * Опции запроса
+					         * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/geocode.xml
+					         */
+					        // Сортировка результатов от центра окна карты.
+					        // boundedBy: myMap.getBounds(),
+					        // strictBounds: true,
+					        // Вместе с опцией boundedBy будет искать строго внутри области, указанной в boundedBy.
+					        // Если нужен только один результат, экономим трафик пользователей.
+					        results: 1
+					    }).then(function (res) {
+					            // Выбираем первый результат геокодирования.
+					            var firstGeoObject = res.geoObjects.get(0),
+					                // Координаты геообъекта.
+					                coords = firstGeoObject.geometry.getCoordinates(),
+					                // Область видимости геообъекта.
+					                bounds = firstGeoObject.properties.get('boundedBy');
+
+					            firstGeoObject.options.set('preset', 'islands#darkBlueDotIconWithCaption');
+					            // Получаем строку с адресом и выводим в иконке геообъекта.
+					            firstGeoObject.properties.set('iconCaption', firstGeoObject.getAddressLine());
+
+					            // Добавляем первый найденный геообъект на карту.
+					            myMap.geoObjects.add(firstGeoObject);
+					            // Масштабируем карту на область видимости геообъекта.
+					            myMap.setBounds(bounds, {
+					                // Проверяем наличие тайлов на данном масштабе.
+					                checkZoomRange: true
+
+					            });
+
+
+					            /**
+					             * Все данные в виде javascript-объекта.
+					             */
+					            console.log('Все данные геообъекта: ', firstGeoObject.properties.getAll());
+					            /**
+					             * Метаданные запроса и ответа геокодера.
+					             * @see https://api.yandex.ru/maps/doc/geocoder/desc/reference/GeocoderResponseMetaData.xml
+					             */
+					            console.log('Метаданные ответа геокодера: ', res.metaData);
+					            /**
+					             * Метаданные геокодера, возвращаемые для найденного объекта.
+					             * @see https://api.yandex.ru/maps/doc/geocoder/desc/reference/GeocoderMetaData.xml
+					             */
+					            console.log('Метаданные геокодера: ', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData'));
+					            /**
+					             * Точность ответа (precision) возвращается только для домов.
+					             * @see https://api.yandex.ru/maps/doc/geocoder/desc/reference/precision.xml
+					             */
+					            console.log('precision', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.precision'));
+					            /**
+					             * Тип найденного объекта (kind).
+					             * @see https://api.yandex.ru/maps/doc/geocoder/desc/reference/kind.xml
+					             */
+					            console.log('Тип геообъекта: %s', firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.kind'));
+					            console.log('Название объекта: %s', firstGeoObject.properties.get('name'));
+					            console.log('Описание объекта: %s', firstGeoObject.properties.get('description'));
+					            console.log('Полное описание объекта: %s', firstGeoObject.properties.get('text'));
+					            /**
+					            * Прямые методы для работы с результатами геокодирования.
+					            * @see https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/GeocodeResult-docpage/#getAddressLine
+					            */
+					            console.log('\nГосударство: %s', firstGeoObject.getCountry());
+					            console.log('Населенный пункт: %s', firstGeoObject.getLocalities().join(', '));
+					            console.log('Адрес объекта: %s', firstGeoObject.getAddressLine());
+					            console.log('Наименование здания: %s', firstGeoObject.getPremise() || '-');
+					            console.log('Номер здания: %s', firstGeoObject.getPremiseNumber() || '-');
+
+					            /**
+					             * Если нужно добавить по найденным геокодером координатам метку со своими стилями и контентом балуна, создаем новую метку по координатам найденной и добавляем ее на карту вместо найденной.
+					             */
+					            /**
+					             var myPlacemark = new ymaps.Placemark(coords, {
+					             iconContent: 'моя метка',
+					             balloonContent: 'Содержимое балуна <strong>моей метки</strong>'
+					             }, {
+					             preset: 'islands#violetStretchyIcon'
+					             });
+
+					             myMap.geoObjects.add(myPlacemark);
+					             */
+					             // https://tech.yandex.ru/maps/jsapi/doc/2.1/ref/reference/map.ZoomRange-docpage/
+        //var coords = res.geoObjects.get(0)
+        console.log(firstGeoObject)
+            firstGeoObject.geometry.getCoordinates();
+        map.zoomRange.get(coords)
+            .then(function (range) {
+                map.setCenter(coords, range[1]);
+            });
+
+
+					        });
+							}
+
+
+
+				</script>
+		</div>
+		</div>
+		<!-- ############################################################# -->
 		<!-- {% else %} -->
 			<!-- <p><strong><em>Нет данных ({{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }})!</em></strong></p> -->
 		<!-- {% endif %} -->
 		<div>
-			{% if page.has_previous %}
-			<a href="?page={{ page.previous_page_number }}">First</a>
-			{% endif %}
-			{{ page.number }} of {{ page.paginator.num_pages }}
-			{% if page.has_next %}
-			<a href="?page={{ page.next_page_number }}">Next</a>
-			{% endif %}
-
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					{% if page.has_previous %}
+						<li class="page-item"><a href="?page={{ page.previous_page_number }}" class="page-link">Предыдущая</a></li>
+					{% endif %}
+					{% if page.paginator.num_pages > 1 %}
+						<li class="page-item"><p  class="page-link">{{ page.number }} из {{ page.paginator.num_pages }}</p></li>
+					{% endif %}
+					{% if page.has_next %}
+						<li class="page-item"><a href="?page={{ page.next_page_number }}" class="page-link">Следующая</a></li>
+					{% endif %}
+				</ul>
+			</nav>
 		</div>
 
 	</div>
 	</div>
 	</div>
+
+
+<script src="{% static 'org_selector/jquery-3.4.1.js'%}"></script>
+<script src="{% static 'org_selector/bootstrap.min.js'%}"></script>
+
 </body>
 </html>
