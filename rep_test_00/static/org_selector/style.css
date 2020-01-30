@@ -1,0 +1,19 @@
+.d-table{
+  display: table;
+  width: 60%;
+  border-collapse: collapse;
+}
+.d-tr{
+  display: table-row;
+}
+.d-td{
+  display: table-cell;
+  /*text-align: center;*/
+  border: none;
+  border: 1px solid #ccc;
+  /*vertical-align: middle;*/
+}
+
+.basic {
+	width: 300px;
+}

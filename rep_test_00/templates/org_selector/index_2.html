@@ -9,22 +9,66 @@
 		" type="text/javascript"></script>
 </head>
 <body>
-	<h1>Test 2</h1>
-	<div>
-		<a href="/0/0/0/0/">Старая ссылка</a>
-	</div>
-	<div>
-		<p><a href="{{ href_vid_sel }}"><strong>Смена фильтра</strong></a></p>
-	</div>
-	<div>
-		<!-- {{ test.0 }} > {{ test.1 }} > {{ test.2 }} > {{ test.3 }} -->
-		<p><a href="/{{ vid_sel }}/0/0/0/0/"><strong>Сбросить фильтр</strong></a></p>
-	</div>
 
 	<div class="container-fluid">
-	<div class="row no-gutters">
+	<div class="row">
+		<div class="col offset-lg-1">
+			<h1>Test 2</h1>
+			<a href="/0/0/0/0/">Старая ссылка</a>
+		</div>
+	</div>
 
-	<div class="col-lg-2 col-md-3 col-sm-6">
+	
+	<div class="row">
+		<div class="col-md-5 mt-2 mb-1 offset-lg-1">
+			<a href="{{ href_vid_sel }}" class="btn btn-primary btn-sm" role="button"data-toggle="tooltip" data-placement="bottom" title="Выбор фильтров между 'Город\Раонон' и 'Отрасль'">Смена фильтра</a>
+			<a href="/{{ vid_sel }}/0/0/0/0/" class="btn btn-primary btn-sm" role="button">Сбросить фильтр</a>
+		</div>		
+		<div class="col-md-7 col-lg-5" style="padding-bottom: 0px; margin-bottom: 5px; height: 40px;">
+			<div class="alert alert-warning mb-1" role="alert" style="font-size: 10px; padding: 5px; margin: 0px; height: 40px;">
+				Фильтр, это панель с левого края для выбора организаций по отраслям либо (кнопка "Смена фильтра") городам и районам.
+		  
+			
+			</div>
+			
+		</div>
+	</div>
+	
+	{% if me_vid1 > 0 %}
+	<div class="row">
+		<div class="col-lg-10 col-sm-12 offset-lg-1">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb p-1 mb-1">
+			  	{% for me_vid1_n in vid_1 %}
+			  		{% if me_vid1_n.id == me_vid1 %}
+			    		<li class="breadcrumb-item">{{ me_vid1_n.name }}</li>
+			    	{% endif %}
+				{% endfor %}
+			  	{% for me_pod_vid1_n in pod_vid_1 %}
+			  		{% if me_pod_vid1_n.id == me_podvid1 %}
+			    	<li class="breadcrumb-item">{{ me_pod_vid1_n.name }}</li>
+			    	{% endif %}
+				{% endfor %}
+			  	{% for me_vid2_n in vid_2 %}
+			  		{% if me_vid2_n.id == me_vid2 %}
+			    		<li class="breadcrumb-item">{{ me_vid2_n.name }}</li>
+			    	{% endif %}
+				{% endfor %}
+			  	{% for me_pod_vid2_n in pod_vid_2 %}
+			  		{% if me_pod_vid2_n.id == me_podvid2 %}
+			    	<li class="breadcrumb-item">{{ me_pod_vid2_n.name }}</li>
+			    	{% endif %}
+				{% endfor %}
+
+			  </ol>
+			</nav>
+		</div>
+	</div>
+	{% endif %}
+	
+	<div class="row">
+
+	<div class="col-lg-2 col-md-3 col-sm-6 mb-1 offset-lg-1">
 		<h5>{{ name_vid.0 }}</h5>
 		<div class="list-group">
 		{% for vid_1_n in vid_1 %}
@@ -50,7 +94,7 @@
 		</div>
 	</div>
 	{% if vid_2.count > 0 %}
-	<div class="col-lg-2 col-md-3 col-sm-6">
+	<div class="col-lg-2 col-md-3 col-sm-6 mb-1">
 		<h5>{{ name_vid.1 }}</h5>
 		<div class="list-group">
 		{% for vid_2_n in vid_2 %}
@@ -71,7 +115,7 @@
 		</div>
 	</div>
 	{% endif %}
-	<div class="col-md-6 p-3">
+	<div class="col-md-6">
 		<!-- {% if Orgs.count > 0 %} -->
 		<!-- ############################################################# -->
 		<nav>
@@ -98,7 +142,9 @@
 					{% if org_cont.url|length != 0 %}
 						<p>www: <a href="{{ org_cont.url }}" target="_blank"><strong>{{ org_cont.url }}</strong></a></p>
 					{% endif %}
-					<p>Время работы: <strong>{{ org_cont.vremya }}</strong></p>
+					{% if org_cont.vremya|length != 0 %}
+						<p>Время работы: <strong>{{ org_cont.vremya }}</strong></p>
+					{% endif %}
 				{% endif %}
 
 			{% endfor %}
@@ -107,11 +153,12 @@
 		</div>
 		<div class="tab-pane fade" id="sheff" role="tabpanel" aria-labelledby="nav-sheff-tab">
 			<p></p>
-			<p>{{ sheff.dolzhn }}</p>
-			<p>{{ sheff.inn_ruk }}</p>
-			<p>{{ sheff.fm }} {{ sheff.im }} {{ sheff.ot }}</p>
-
-
+			<p>Должность: <strong>{{ sheff.dolzhn|capfirst }}</strong></p>
+			<p>ИНН: <strong>{{ sheff.inn_ruk }}</strong></p>
+			<p>ФИО: <strong>{{ sheff.fm|title }} {{ sheff.im|title }} {{ sheff.ot|title }}</strong></p>
+			{% if sheff.doc|length > 0 %}
+				<p>Действует на основании: <strong>{{ sheff.doc }} №{{ sheff.nom_doc }} от {{ sheff.dt_doc }}</strong></p>
+			{% endif %}
 		</div>
 		<div class="tab-pane fade" id="map_pane" role="tabpanel" aria-labelledby="nav-map-tab">
 			<p style="color: red;">Модуль "Карта" работает в тестовом режиме!</p>

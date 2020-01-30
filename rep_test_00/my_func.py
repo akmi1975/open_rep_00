@@ -34,7 +34,7 @@ def basic_filtr_or(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2
 		if ME_PODVID2_ID != 0:
 			orgs = orgs.filter(pod_otrasl=ME_PODVID2_ID)
 			OrgContact = OrgContact.filter(org__pod_otrasl__exact=ME_PODVID2_ID)
-		name_vid = ['Район', 'Отрасль']
+		name_vid = ['Город\\Район', 'Отрасль']
 		
 	elif vid_sel == 1:
 		vid_1 = Otrasl.objects.filter(org__otrasl__gt=0).distinct()
@@ -57,7 +57,7 @@ def basic_filtr_or(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2
 		if ME_PODVID2_ID != 0:
 			orgs = orgs.filter(nsp=ME_PODVID2_ID)
 			OrgContact = OrgContact.filter(org__nsp__exact=ME_PODVID2_ID)
-		name_vid = ['Отрасль','Район']
+		name_vid = ['Отрасль','Город\\Район']
 
 
 	paginator = Paginator(orgs, 1)
@@ -67,7 +67,7 @@ def basic_filtr_or(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2
 		page_num = 1
 	page = paginator.get_page(page_num)
 
-	sheff = Sheff.objects.get(org=page.object_list[0])
+	sheff = Sheff.objects.filter(org=page.object_list[0]).filter(active=True)[0]
 
 	return {'href_vid_sel':'/' + str(vs) + '/0/0/0/0/', 'vid_sel':vid_sel, 'vid_1':vid_1, 'vid_2':vid_2, 'pod_vid_1':pod_vid_1,'pod_vid_2':pod_vid_2, 'me_vid1':ME_VID1_ID, 'me_podvid1':ME_PODVID1_ID, 'me_vid2':ME_VID2_ID, 'me_podvid2':ME_PODVID2_ID, 'Orgs':page.object_list, 'OrgContact':OrgContact, 'page':page, 'name_vid':name_vid, 'sheff':sheff}
 
