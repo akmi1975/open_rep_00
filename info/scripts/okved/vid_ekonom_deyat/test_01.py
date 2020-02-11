@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from selenium import webdriver
 import os.path
 
-phantomjs_path = "phantomjs.exe"
+phantomjs_path = "C:\\$MY$\\OpenData\\web_driver\\phantomjs.exe"
 
 url = 'http://www.abyalil.ru/openrepublic/'
 
