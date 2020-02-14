@@ -69,6 +69,29 @@ class PodOtrasl(models.Model):
 		verbose_name_plural = 'Подотрасли'
 		verbose_name = 'Подотрасль'
 
+class CatUslugi(models.Model):
+	name = models.CharField(max_length=50, verbose_name='Наименование категории')
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = 'Категории услуг'
+		verbose_name = 'Категория услуг'
+
+
+class VidUslugi(models.Model):
+	cat_usl = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
+	name = models.CharField(max_length=50, verbose_name='Наименование вида')
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name_plural = 'Виды услуг'
+		verbose_name = 'Вид услуги'
+
+
 class Org(models.Model):
 	#rayon = models.ForeignKey(GorRayon, null=True, on_delete=models.PROTECT, verbose_name='Район')
 	otrasl = models.ForeignKey(Otrasl, null=True, on_delete=models.PROTECT, verbose_name='Отрасль')
@@ -102,6 +125,15 @@ class Org(models.Model):
 	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
 	okved = models.CharField(null=True, max_length=8, verbose_name='ОКВЭД')
 	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
+	cat_uslugi = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
+	vid_uslugi = ChainedForeignKey(
+        VidUslugi,
+        chained_field='cat_usl',
+        chained_model_field='cat_usl',
+        show_all=False,
+        auto_choose=True,
+        null=True,
+        verbose_name='Вид услуги')
 
 	def __str__(self):
 		return self.name_short
@@ -139,5 +171,24 @@ class Sheff(models.Model):
 		return f'{self.fm} {self.im} {self.ot}'
 
 	class Meta:
-		verbose_name_plural = 'Руководители'			
+		verbose_name_plural = 'Руководители'
 		verbose_name = 'Руководитель'
+
+class Uslugi(models.Model):
+	cat_uslugi = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
+	vid_uslugi = ChainedForeignKey(
+        VidUslugi,
+        chained_field='cat_usl',
+        chained_model_field='cat_usl',
+        show_all=False,
+        auto_choose=True,
+        null=True,
+        verbose_name='Вид услуги')
+	description = models.TextField(verbose_name='Описание услуги')
+	documents = models.TextField(verbose_name='Список документов (через ;)')
+	price = models.CharField(max_length=50, verbose_name='Стоимость услуги')
+	url_gosuslugi = models.URLField(verbose_name='Адрес госуслуги')
+
+	class Meta:
+		verbose_name_plural = 'Услуги'
+		verbose_name = 'Услуга'

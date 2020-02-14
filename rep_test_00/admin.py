@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Regions, GorRayon, Nsp, Otrasl, PodOtrasl, Org, orgContact, Sheff
+from .models import Regions, GorRayon, Nsp, Otrasl, PodOtrasl, Org, orgContact, Sheff, CatUslugi, VidUslugi, Uslugi
 
 
 class RegionsAdmin(admin.ModelAdmin):
@@ -42,13 +42,21 @@ class SheffAdmin(admin.ModelAdmin):
 	# Related Field has invalid lookup: icontains
 	# https://code.djangoproject.com/ticket/2331
 	#list_filter = ('org',)
+class CatUslugiAdmin(admin.ModelAdmin):
+	list_display = ('id', 'name')
+
+class VidUslugiAdmin(admin.ModelAdmin):
+	list_display = ('id', 'cat_usl', 'name')
+
+class UslugiAdmin(admin.ModelAdmin):
+	list_display = ('id', 'cat_uslugi', 'vid_uslugi', 'description', 'documents', 'price', 'url_gosuslugi')
 
 #class OtraslAdmin(admin.ModelAdmin):
 #	list_display = ('name')
 
 
-#admin.site.register(Regions)	
-admin.site.register(Regions, RegionsAdmin)	
+#admin.site.register(Regions)
+admin.site.register(Regions, RegionsAdmin)
 #admin.site.register(GorRayon)
 admin.site.register(GorRayon, GorRayonAdmin)
 admin.site.register(Nsp, NspAdmin)
@@ -58,3 +66,6 @@ admin.site.register(PodOtrasl, PodOtraslAdmin)
 admin.site.register(Org, OrgAdmin)
 admin.site.register(orgContact, orgContactAdmin)
 admin.site.register(Sheff, SheffAdmin)
+admin.site.register(CatUslugi, CatUslugiAdmin)
+admin.site.register(VidUslugi, VidUslugiAdmin)
+admin.site.register(Uslugi, UslugiAdmin)
