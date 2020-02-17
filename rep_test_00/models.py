@@ -186,8 +186,9 @@ class Uslugi(models.Model):
         verbose_name='Вид услуги')
 	description = models.TextField(verbose_name='Описание услуги')
 	documents = models.TextField(verbose_name='Список документов (через ;)')
-	price = models.CharField(max_length=50, verbose_name='Стоимость услуги')
-	url_gosuslugi = models.URLField(verbose_name='Адрес госуслуги')
+	price = models.CharField(max_length=50, verbose_name='Стоимость услуги', null=True)
+	url_gosuslugi = models.URLField(verbose_name='Адрес госуслуги', null=True)
+	url_usl_on_site = models.URLField(verbose_name='Адрес на сайте', null=True)
 
 	class Meta:
 		verbose_name_plural = 'Услуги'
