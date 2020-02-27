@@ -1,8 +1,10 @@
 					var h_map_pane = document.querySelector("a[href='#map_pane']")
 					//console.log(h_map_pane)
 					h_map_pane.onclick = function(){
-					//console.log('test')
-						ymaps.ready(init);
+						let maps = document.getElementById('map').childNodes
+						//console.log(maps.length == 0);
+						if (maps.length == 0) {ymaps.ready(init);}
+						
 					}
 
 					//ymaps.ready(init);

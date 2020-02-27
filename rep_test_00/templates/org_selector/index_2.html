@@ -154,7 +154,9 @@
 		<div class="tab-pane fade" id="sheff" role="tabpanel" aria-labelledby="nav-sheff-tab">
 			<p></p>
 			<p>Должность: <strong>{{ sheff.dolzhn|capfirst }}</strong></p>
-			<p>ИНН: <strong>{{ sheff.inn_ruk }}</strong></p>
+			{% if sheff.inn_ruk|length > 0 %}
+				<p>ИНН: <strong>{{ sheff.inn_ruk }}</strong></p>
+			{% endif %}
 			<p>ФИО: <strong>{{ sheff.fm|title }} {{ sheff.im|title }} {{ sheff.ot|title }}</strong></p>
 			{% if sheff.doc|length > 0 %}
 				<p>Действует на основании: <strong>{{ sheff.doc }} №{{ sheff.nom_doc }} от {{ sheff.dt_doc }}</strong></p>

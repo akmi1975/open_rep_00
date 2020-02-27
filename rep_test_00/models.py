@@ -125,7 +125,7 @@ class Org(models.Model):
 	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
 	okved = models.CharField(null=True, max_length=8, verbose_name='ОКВЭД')
 	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
-	cat_uslugi = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
+	cat_uslugi = models.ForeignKey(CatUslugi, null=True, blank=True,on_delete=models.PROTECT, verbose_name='Категория услуги')
 	vid_uslugi = ChainedForeignKey(
         VidUslugi,
         chained_field='cat_usl',
@@ -133,6 +133,7 @@ class Org(models.Model):
         show_all=False,
         auto_choose=True,
         null=True,
+        blank=True,
         verbose_name='Вид услуги')
 
 	def __str__(self):
