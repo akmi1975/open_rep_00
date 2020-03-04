@@ -1,0 +1,43 @@
+
+{% load static %}
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'org_selector/bootstrap.min.css'%}">
+</head>
+<body>
+
+
+<h1>{{ test }}</h1>
+
+<div class="container">
+	<div class="row">
+		<div class="col-2">
+			<h1>Test 3</h1>
+			<a href="/0/0/0/0/">Старая ссылка</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3">
+			{% for ct_usl in cat_usl %}
+				{{ ct_usl }} ({{ ct_usl.id }})
+			{% endfor %}
+		</div>
+		<div class="col-3">
+			{% for vd_usl in vid_usl %}
+				{{ vd_usl }} ({{ vd_usl.id }})
+			{% endfor %}
+		</div>
+		<div class="col-4"></div>
+	</div>
+</div>
+
+
+
+<script src="{% static 'org_selector/jquery-3.4.1.min.js'%}"></script>
+<script src="{% static 'org_selector/bootstrap.min.js'%}"></script>
+
+</body>
+</html>

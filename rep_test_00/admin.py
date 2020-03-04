@@ -35,6 +35,7 @@ class PodOtraslAdmin(admin.ModelAdmin):
 
 class orgContactAdmin(admin.ModelAdmin):
 	list_display = ('org', 'adres', 'telefone', 'email', 'url')
+	list_filter = ('org__rayon','org__otrasl',)
 
 class SheffAdmin(admin.ModelAdmin):
 	list_display = ('org', 'fm', 'im', 'ot', 'inn_ruk',  'active')

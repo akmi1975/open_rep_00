@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Org, GorRayon, Nsp, Otrasl, PodOtrasl, orgContact
-from .my_func import basic_filtr_or
+from .my_func import basic_filtr_or, filter_uslugi
 #from django.db.models import Q
 
 ME_OTRASL_ID = 0
@@ -86,3 +86,10 @@ def by_otrasl(request, otrasl_id, podotrasl_id, rayon_id, nsp_id):
 def new_selection(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2_id):
 	context = basic_filtr_or(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2_id)
 	return render(request, 'org_selector/index_2.html', context)
+
+
+def select_uslugi(request, cat_usl_id, vid_usl_id):
+	context = filter_uslugi(request, cat_usl_id, vid_usl_id)
+	return render(request, 'org_selector/index_3.html', context)
+	
+
