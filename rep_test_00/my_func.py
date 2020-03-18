@@ -75,7 +75,21 @@ def basic_filtr_or(request, vid_sel, vid_1_id, pod_vid_1_id, vid_2_id, pod_vid_2
 	return {'href_vid_sel':'/' + str(vs) + '/0/0/0/0/', 'vid_sel':vid_sel, 'vid_1':vid_1, 'vid_2':vid_2, 'pod_vid_1':pod_vid_1,'pod_vid_2':pod_vid_2, 'me_vid1':ME_VID1_ID, 'me_podvid1':ME_PODVID1_ID, 'me_vid2':ME_VID2_ID, 'me_podvid2':ME_PODVID2_ID, 'Orgs':page.object_list, 'OrgContact':OrgContact, 'page':page, 'name_vid':name_vid, 'sheff':sheff}
 
 def filter_uslugi(request, cat_usl_id, vid_usl_id):
+	cur_cat_usl = cat_usl_id
+	cur_vid_usl = vid_usl_id
+
 	cat_usl = CatUslugi.objects.all()
-	vid_usl = VidUslugi.objects.all()
-	return {'cat_usl':cat_usl, 'vid_usl':vid_usl}
+	vid_usl = VidUslugi.objects.filter(cat_usl=cur_cat_usl)
+	cur_usl = VidUslugi.objects.filter(id=vid_usl_id)
+
+	if len(cur_usl) == 1:
+		test = cur_usl[0].pod_otr_txt.split(',')
+		pod_otr_usl = PodOtrasl.objects.filter(pk__in=cur_usl[0].pod_otr_txt.split(','))
+	else:
+		test = 0
+		pod_otr_usl = None
+
+	#usl_cat = Org.objects.filter(pod_otrasl=cur_cat_usl)
+
+	return {'cat_usl':cat_usl, 'vid_usl':vid_usl, 'cur_cat_usl':cur_cat_usl, 'cur_vid_usl':cur_vid_usl, 'test':test, 'pod_otr_usl':pod_otr_usl}
 	

@@ -83,6 +83,7 @@ class CatUslugi(models.Model):
 class VidUslugi(models.Model):
 	cat_usl = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
 	name = models.CharField(max_length=50, verbose_name='Наименование вида')
+	pod_otr_txt = models.CharField(max_length=50, null=True, blank=True, verbose_name='Подотрасли (через запятую)')
 
 	def __str__(self):
 		return self.name
@@ -125,16 +126,6 @@ class Org(models.Model):
 	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
 	okved = models.CharField(null=True, max_length=8, verbose_name='ОКВЭД')
 	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
-	cat_uslugi = models.ForeignKey(CatUslugi, null=True, blank=True,on_delete=models.PROTECT, verbose_name='Категория услуги')
-	vid_uslugi = ChainedForeignKey(
-        VidUslugi,
-        chained_field='cat_usl',
-        chained_model_field='cat_usl',
-        show_all=False,
-        auto_choose=True,
-        null=True,
-        blank=True,
-        verbose_name='Вид услуги')
 
 	def __str__(self):
 		return self.name_short
@@ -176,7 +167,7 @@ class Sheff(models.Model):
 		verbose_name = 'Руководитель'
 
 class Uslugi(models.Model):
-	cat_uslugi = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
+	cat_usl = models.ForeignKey(CatUslugi, null=True, on_delete=models.PROTECT, verbose_name='Категория услуги')
 	vid_uslugi = ChainedForeignKey(
         VidUslugi,
         chained_field='cat_usl',
@@ -189,7 +180,7 @@ class Uslugi(models.Model):
 	documents = models.TextField(verbose_name='Список документов (через ;)')
 	price = models.CharField(max_length=50, verbose_name='Стоимость услуги', null=True)
 	url_gosuslugi = models.URLField(verbose_name='Адрес госуслуги', null=True)
-	url_usl_on_site = models.URLField(verbose_name='Адрес на сайте', null=True)
+	url_usl_on_site = models.URLField(verbose_name='Адрес на сайте региона', null=True)
 
 	class Meta:
 		verbose_name_plural = 'Услуги'

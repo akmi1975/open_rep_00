@@ -47,10 +47,10 @@ class CatUslugiAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name')
 
 class VidUslugiAdmin(admin.ModelAdmin):
-	list_display = ('id', 'cat_usl', 'name')
+	list_display = ('id', 'cat_usl', 'name', 'pod_otr_txt')
 
 class UslugiAdmin(admin.ModelAdmin):
-	list_display = ('id', 'cat_uslugi', 'vid_uslugi', 'description', 'documents', 'price', 'url_gosuslugi')
+	list_display = ('id', 'cat_usl', 'vid_uslugi', 'description', 'documents', 'price', 'url_gosuslugi')
 
 #class OtraslAdmin(admin.ModelAdmin):
 #	list_display = ('name')
