@@ -80,16 +80,21 @@ def filter_uslugi(request, cat_usl_id, vid_usl_id):
 
 	cat_usl = CatUslugi.objects.all()
 	vid_usl = VidUslugi.objects.filter(cat_usl=cur_cat_usl)
-	cur_usl = VidUslugi.objects.filter(id=vid_usl_id)
+	curvid_usl = VidUslugi.objects.filter(id=cur_vid_usl)
+	
 
-	if len(cur_usl) == 1:
-		test = cur_usl[0].pod_otr_txt.split(',')
-		pod_otr_usl = PodOtrasl.objects.filter(pk__in=cur_usl[0].pod_otr_txt.split(','))
+	if len(curvid_usl) == 1:
+		test = curvid_usl[0].pod_otr_txt.split(',')
+		pod_otr_usl = PodOtrasl.objects.filter(pk__in=curvid_usl[0].pod_otr_txt.split(','))
+		name_usl = curvid_usl[0].name
+		cur_usl = Uslugi.objects.get(vid_uslugi=cur_vid_usl)
 	else:
 		test = 0
 		pod_otr_usl = None
+		name_usl = ''
+		cur_usl = ''
 
 	#usl_cat = Org.objects.filter(pod_otrasl=cur_cat_usl)
 
-	return {'cat_usl':cat_usl, 'vid_usl':vid_usl, 'cur_cat_usl':cur_cat_usl, 'cur_vid_usl':cur_vid_usl, 'test':test, 'pod_otr_usl':pod_otr_usl}
+	return {'cat_usl':cat_usl, 'vid_usl':vid_usl, 'cur_cat_usl':cur_cat_usl, 'cur_vid_usl':cur_vid_usl, 'test':test, 'pod_otr_usl':pod_otr_usl, 'cur_usl':cur_usl, 'name_usl':name_usl}
 	

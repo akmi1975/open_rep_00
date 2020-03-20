@@ -24,6 +24,7 @@ class NspAdmin(admin.ModelAdmin):
 class OrgAdmin(admin.ModelAdmin):
 	list_display = ('inn', 'name', 'otrasl', 'pod_otrasl', 'nsp', 'okved')
 	list_filter = ('region', 'rayon', 'nsp', 'otrasl', 'pod_otrasl',)
+	search_fields = ('name', 'sheff__fm')
 
 class OtraslAdmin(admin.ModelAdmin):
 	list_display = ('id', 'name')

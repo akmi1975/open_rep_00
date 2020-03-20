@@ -10,7 +10,7 @@
 <body>
 
 
-<h1>{{ test }}</h1>
+
 
 <div class="container">
 	<div class="row">
@@ -20,24 +20,70 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-3">
+		<div class="col-lg-3 col-md-3 col-sm-6 mb-1">
+			<div class="list-group">
+			<h5>Категория</h5>
 			{% for ct_usl in cat_usl %}
-				<a href="/uslugi/{{ ct_usl.id }}/0/">{{ ct_usl }} ({{ ct_usl.id }})</a>
+				{% if ct_usl.id == cur_cat_usl %}
+					<a href="/uslugi/{{ ct_usl.id }}/0/" class="list-group-item list-group-item-action list-group-item-primary p-1 active">{{ ct_usl }}</a>
+				{% else %}
+					<a href="/uslugi/{{ ct_usl.id }}/0/" class="list-group-item list-group-item-action list-group-item-primary p-1">{{ ct_usl }}</a>
+				{% endif %}
 				
 			{% endfor %}
+			</div>
 		</div>
-		<div class="col-3">
+		<div class="col-lg-3 col-md-3 col-sm-6 mb-1">
+			{% if cur_cat_usl > 0 %}
+				<h5>Услуги</h5>
+			{% endif %}
 			{% for vd_usl in vid_usl %}
-				<a href="/uslugi/{{ cur_cat_usl }}/{{ vd_usl.id }}/">{{ vd_usl }} ({{ vd_usl.id }}) ({{ vd_usl.pod_otr_txt }})</a>
-				
+				<div class="list-group">				
+				{% if vd_usl.id == cur_vid_usl %}
+					<a href="/uslugi/{{ cur_cat_usl }}/{{ vd_usl.id }}/"  class="list-group-item list-group-item-action list-group-item-primary p-1 active">{{ vd_usl }}</a>
+				{% else %}
+					<a href="/uslugi/{{ cur_cat_usl }}/{{ vd_usl.id }}/"  class="list-group-item list-group-item-action list-group-item-primary p-1">{{ vd_usl }}</a>
+
+				{% endif %}
+				</div>
 			{% endfor %}
 		</div>
-		<div class="col-4">
-		
-			{% for pod_otr in pod_otr_usl %}
-				<a href="/1/{{ pod_otr.otrasl.id }}/{{ pod_otr.id }}/0/0/"><p>{{ pod_otr }}</p></a>
-				
-			{% endfor %}
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-12">
+					<h3>{{ name_usl }}</h3>
+				</div>
+			</div>
+			<div class="row" style="font-size: 14px">
+				{% if cur_usl|wordcount > 0 %}
+				<div class="col-6">
+					<h5>Описание</h5>
+					{{ cur_usl.description }}
+				</div>
+				<div class="col-6">
+					<h5>Документы</h5>
+					{{ cur_usl.documents|linebreaksbr }}
+				</div>
+				{% endif %}
+			</div>
+			<div class="row">
+				<div class="col-12 mt-2	">
+					{% if cur_usl|wordcount > 0 %}
+					<p><strong>Исполнитель услуги:</strong>  
+						{% for pod_otr in pod_otr_usl %}
+							<a href="/1/{{ pod_otr.otrasl.id }}/{{ pod_otr.id }}/0/0/">{{ pod_otr }}</a>
+						{% endfor %}
+					</p>
+					<p><strong>Стоимость услуги: </strong>{{ cur_usl.price }}</p>
+					<p><a href="{{ cur_usl.url_gosuslugi }}" target="_blank">Услуга на сайте "Госуслуги"</a></p>
+					<p><a href="{{ cur_usl.url_usl_on_site }}" target="_blank">Услуга на региональном сайте</a></p>
+					<p></p>
+					{% endif %}
+				</div>
+			</div>
+
+
+
 			
 		</div>
 	</div>
