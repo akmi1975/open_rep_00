@@ -17,3 +17,36 @@
 .basic {
 	width: 300px;
 }
+
+      .my_header {
+        background-image: url(img/tekstura-geometriya-siniy.jpg);
+        background-position: 0% 50%; /* Положение фона  флаг КЧР 50 Х 20 */
+        background-repeat: no-repeat; /* Отменяем повторение фона */
+      text-shadow: 1px 1px 5px black;
+        color: white;
+        }
+      .zaglavn {
+        font-size: 60px;
+        font-weight: bold;
+      }
+      .my_menu {
+        color: white;
+        font-size: 20px;
+      }
+      .navbar {
+      padding-top: 0;
+      padding-bottom: 0;
+      }
+      .navbar-nav .nav-link:first-child {
+        color: white;
+
+    }
+      .navbar-nav .nav-link:first-child:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+/*      .nav-item .active:first-child {
+        text-decoration: underline;
+    }
+*/

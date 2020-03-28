@@ -1,24 +1,8 @@
 
-{% load static %}
+{% extends "org_selector/basic.html" %}
 
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" href="{% static 'org_selector/bootstrap.min.css'%}">
-</head>
-<body>
-
-
-
-
+{% block content %}
 <div class="container">
-	<div class="row">
-		<div class="col-2">
-			<h1>Test 3</h1>
-			<a href="/0/0/0/0/">Старая ссылка</a>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-6 mb-1">
 			<div class="list-group">
@@ -29,7 +13,7 @@
 				{% else %}
 					<a href="/uslugi/{{ ct_usl.id }}/0/" class="list-group-item list-group-item-action list-group-item-primary p-1">{{ ct_usl }}</a>
 				{% endif %}
-				
+
 			{% endfor %}
 			</div>
 		</div>
@@ -38,7 +22,7 @@
 				<h5>Услуги</h5>
 			{% endif %}
 			{% for vd_usl in vid_usl %}
-				<div class="list-group">				
+				<div class="list-group">
 				{% if vd_usl.id == cur_vid_usl %}
 					<a href="/uslugi/{{ cur_cat_usl }}/{{ vd_usl.id }}/"  class="list-group-item list-group-item-action list-group-item-primary p-1 active">{{ vd_usl }}</a>
 				{% else %}
@@ -46,6 +30,7 @@
 
 				{% endif %}
 				</div>
+
 			{% endfor %}
 		</div>
 		<div class="col-md-6">
@@ -64,12 +49,14 @@
 					<h5>Документы</h5>
 					{{ cur_usl.documents|linebreaksbr }}
 				</div>
+				{% else %}
+				<p>выберите необходимую категорию и услугу</p>
 				{% endif %}
 			</div>
 			<div class="row">
 				<div class="col-12 mt-2	">
 					{% if cur_usl|wordcount > 0 %}
-					<p><strong>Исполнитель услуги:</strong>  
+					<p><strong>Исполнитель услуги:</strong>
 						{% for pod_otr in pod_otr_usl %}
 							<a href="/1/{{ pod_otr.otrasl.id }}/{{ pod_otr.id }}/0/0/">{{ pod_otr }}</a>
 						{% endfor %}
@@ -84,15 +71,9 @@
 
 
 
-			
+
 		</div>
 	</div>
 </div>
 
-
-
-<script src="{% static 'org_selector/jquery-3.4.1.min.js'%}"></script>
-<script src="{% static 'org_selector/bootstrap.min.js'%}"></script>
-
-</body>
-</html>
+{% endblock %}
