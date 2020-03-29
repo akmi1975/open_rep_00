@@ -2,7 +2,7 @@
 {% extends "org_selector/basic.html" %}
 
 {% block content %}
-<div class="container">
+<div class="container mt-2 my_container">
 	<div class="row">
 		<div class="col-lg-3 col-md-3 col-sm-6 mb-1">
 			<div class="list-group">
@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-6 mb-1">
 			{% if cur_cat_usl > 0 %}
-				<h5>Услуги</h5>
+				<h5>Услуга</h5>
 			{% endif %}
 			{% for vd_usl in vid_usl %}
 				<div class="list-group">
@@ -36,7 +36,11 @@
 		<div class="col-md-6">
 			<div class="row">
 				<div class="col-12">
-					<h3>{{ name_usl }}</h3>
+					{% if cur_usl|wordcount > 0 %}
+						<h3>{{ name_usl }}</h3>
+					{% else %}
+						<h3>Как работает</h3>
+					{% endif %}
 				</div>
 			</div>
 			<div class="row" style="font-size: 14px">
@@ -50,7 +54,11 @@
 					{{ cur_usl.documents|linebreaksbr }}
 				</div>
 				{% else %}
-				<p>выберите необходимую категорию и услугу</p>
+				<div class="col-12">
+					<div class="alert alert-primary" role="alert">
+						<p class="lead mb-0">Выбераем необходимую <strong>"Ктегорию"</strong> и затем <strong>"Услугу"</strong></p>
+					</div>
+				</div>
 				{% endif %}
 			</div>
 			<div class="row">

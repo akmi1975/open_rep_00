@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-	<div class="container-fluid">
+	<div class="container-fluid mt-1 my_container">
 
 	<div class="row">
 		<div class="col-md-5 mt-2 mb-1 offset-lg-1">
@@ -54,7 +54,7 @@
 
 	<div class="row">
 
-	<div class="col-lg-2 col-md-3 col-sm-6 mb-1 offset-lg-1">
+	<div class="col-lg-2 col-md-3 col-sm-6 mb-1 offset-lg-1 order-sm-2 order-md-1">
 		<h5>{{ name_vid.0 }}</h5>
 		<div class="list-group">
 		{% for vid_1_n in vid_1 %}
@@ -80,7 +80,7 @@
 		</div>
 	</div>
 	{% if vid_2.count > 0 %}
-	<div class="col-lg-2 col-md-3 col-sm-6 mb-1">
+	<div class="col-lg-2 col-md-3 col-sm-6 mb-1 order-sm-3 order-md-2">
 		<h5>{{ name_vid.1 }}</h5>
 		<div class="list-group">
 		{% for vid_2_n in vid_2 %}
@@ -101,7 +101,7 @@
 		</div>
 	</div>
 	{% endif %}
-	<div class="col-md-6">
+	<div class="col-md-6 order-sm-1 order-md-3">
 		<!-- {% if Orgs.count > 0 %} -->
 		<!-- ############################################################# -->
 		<nav>

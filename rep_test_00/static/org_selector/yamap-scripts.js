@@ -4,7 +4,7 @@
 						let maps = document.getElementById('map').childNodes
 						//console.log(maps.length == 0);
 						if (maps.length == 0) {ymaps.ready(init);}
-						
+
 					}
 
 					//ymaps.ready(init);
@@ -47,7 +47,7 @@
 					                // Проверяем наличие тайлов на данном масштабе.
 					                checkZoomRange: true
 					                // Добавили для установки масштабирования !!!!!!!!!!!!!!!!
-					            }).then(function(){ myMap.setZoom(14);});
+					            }).then(function(){ myMap.setZoom(15);});
 
 					            //console.log(myMap.getZoom())
 					            /**

@@ -20,6 +20,7 @@
 
       .my_header {
         background-image: url(img/tekstura-geometriya-siniy.jpg);
+
         background-position: 0% 50%; /* Положение фона  флаг КЧР 50 Х 20 */
         background-repeat: no-repeat; /* Отменяем повторение фона */
       text-shadow: 1px 1px 5px black;
@@ -50,3 +51,18 @@
         text-decoration: underline;
     }
 */
+.my_footer {
+  height: 100px;
+  background-color: #282828;
+  color: white;
+}
+
+.my_container {
+  min-height: 400px;
+}
+
+.or_mat_white {
+  background-color: rgba(255,255,255,0.1);
+/*  opacity: .2;
+  color: white;*/
+}

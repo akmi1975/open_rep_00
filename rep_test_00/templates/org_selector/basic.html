@@ -19,8 +19,24 @@
   		<!-- <nav class="navbar sticky-top"> -->
  		<!-- <h1 class="display-4"><span class="zaglavn">О</span>ткрытая	<span class="zaglavn">Р</span>еспублика</h1> -->
   		<!-- </nav> -->
-  		<h1 class="display-5"><span class="zaglavn">О</span>ткрытая	<span class="zaglavn">Р</span>еспублика</h1>
-		<nav class="navbar navbar-expand navbar-light ">
+
+      <div class="row">
+      <div class="col-md-8 col-lg-9">
+  		  <h1 class="display-5"><span class="zaglavn">О</span>ткрытая	<span class="zaglavn">Р</span>еспублика</h1>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-4 col-lg-3 col-xl-2 mt-4">
+        <p>
+          Карачаево-Черкесская республика
+        </p>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-xl-1 mt-2 mb-1 d-none d-xl-block">
+        <img src="{% static 'org_selector/img/gerb.png'%}" class="rounded mx-auto d-block" width="80px" height="80px" alt="Герб КЧР">
+      </div>
+      </div>
+      <div class="row or_mat_white">
+		<nav class="navbar navbar-expand navbar-light">
 		  <div class="collapse navbar-collapse my_menu" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto flex-column flex-sm-row">
 		      <li class="nav-item ">
@@ -33,11 +49,12 @@
 		        <a class="nav-link" href="/uslugi/0/0/">Услуги</a>
 		      </li>
 		      <li class="nav-item">
-		        <a class="nav-link" href="#">Link</a>
+		        <a class="nav-link" href="#">О проекте</a>
 		      </li>
 			</ul>
 		  </div>
 		</nav>
+    </div>
 	</div>
 
 
@@ -48,6 +65,24 @@
     {% endblock %}
 
 
+  <div class="container-fluid my_footer mt-5">
+    <div class="row">
+      <div class="col-4">
+        <h5 class="pt-3">2020 © Открытая республика</h5>
+        <p>
+          социальный проект
+        </p>
+      </div>
+      <div class="col-4 pt-3">
+        <p>Все материалы сайта доступны по лицензии:<br>
+         Creative Commons Attribution 4.0</p>
+      </div>
+      <div class="col-4 pt-3">
+        <p>Обратная связь</p>
+      </div>
+
+    </div>
+  </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!--     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
