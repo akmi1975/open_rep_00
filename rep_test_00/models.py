@@ -121,11 +121,11 @@ class Org(models.Model):
         auto_choose=True,
         null=True,
         verbose_name='Населенный пункт')
-	inn = models.CharField(max_length=12, verbose_name='ИНН')
+	inn = models.CharField(max_length=12, null=True, blank=True, verbose_name='ИНН')
 	name = models.CharField(max_length=300, verbose_name='Наименование')
 	name_short = models.CharField(null=True, max_length=300, verbose_name='Сокращенное наименование')
-	okved = models.CharField(null=True, max_length=8, verbose_name='ОКВЭД')
-	okved_name = models.CharField(null=True, max_length=500, verbose_name='ОКВЭД наименование')
+	okved = models.CharField(null=True, blank=True, max_length=8, verbose_name='ОКВЭД')
+	okved_name = models.CharField(null=True, blank=True, max_length=500, verbose_name='ОКВЭД наименование')
 
 	def __str__(self):
 		return self.name_short
