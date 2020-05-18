@@ -52,13 +52,13 @@
     }
 */
 .my_footer {
-  min-height: 100px;
-  background-color: #282828;
+  min-height: 150px;
+  background-color: #002550;
   color: white;
 }
 
 .my_container {
-  min-height: 400px;
+  min-height: 500px;
 }
 
 .or_mat_white {
