@@ -23,7 +23,7 @@ class NspAdmin(admin.ModelAdmin):
 
 class OrgAdmin(admin.ModelAdmin):
 	list_display = ('inn', 'name', 'otrasl', 'pod_otrasl', 'nsp', 'okved')
-	list_filter = ('region', 'rayon', 'nsp', 'otrasl', 'pod_otrasl',)
+	list_filter = ('region', 'rayon', 'otrasl',)
 	search_fields = ('name', 'sheff__fm')
 
 class OtraslAdmin(admin.ModelAdmin):
@@ -41,6 +41,7 @@ class orgContactAdmin(admin.ModelAdmin):
 class SheffAdmin(admin.ModelAdmin):
 	list_display = ('org', 'fm', 'im', 'ot', 'inn_ruk',  'active')
 	search_fields = ('org__name_short', 'fm', 'im', 'ot')
+	list_filter = ('org__rayon','org__otrasl',)
 	# Related Field has invalid lookup: icontains
 	# https://code.djangoproject.com/ticket/2331
 	#list_filter = ('org',)
