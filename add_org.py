@@ -7,7 +7,7 @@ from time import sleep
 from rep_test_00.models import Org, Otrasl, Regions, GorRayon, PodOtrasl, Nsp
 
 # =====================================================
-CSV_FILE = 'org_template_org_file_karach_fap.csv'
+CSV_FILE = 'org_template_org_file_karach_new.csv'
 # =====================================================
 
 

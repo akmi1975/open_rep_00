@@ -22,7 +22,7 @@ class NspAdmin(admin.ModelAdmin):
 	list_filter = ('region', 'rayon', 'mo',)
 
 class OrgAdmin(admin.ModelAdmin):
-	list_display = ('inn', 'name', 'otrasl', 'pod_otrasl', 'nsp', 'okved')
+	list_display = ('id', 'inn', 'name', 'otrasl', 'pod_otrasl', 'nsp', 'okved')
 	list_filter = ('region', 'rayon', 'otrasl',)
 	search_fields = ('name', 'sheff__fm')
 
